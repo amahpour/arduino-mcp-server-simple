@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "arduino": {
+      "command": "python",
+      "args": ["mcp_arduino.py"]
+    }
+  }
+} 
