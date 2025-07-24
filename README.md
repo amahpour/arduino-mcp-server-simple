@@ -36,6 +36,18 @@ arduino-cli version
 python mcp_arduino.py
 ```
 
+### Cursor Integration
+
+This project includes a `.cursor/mcp.json` configuration file that allows Cursor users to integrate the Arduino MCP server directly into their development environment.
+
+The configuration automatically registers the Arduino MCP server, giving you access to Arduino development tools directly within Cursor's AI features. You can:
+
+- Ask Cursor to compile and upload Arduino sketches
+- Test serial communication through the AI interface
+- Get help with Arduino development workflows
+
+The MCP server will be available as soon as you open this project in Cursor.
+
 ### Available Tools
 
 - `list_ports()` - List all available USB/serial ports
