@@ -2,6 +2,8 @@
 
 A simple Model Context Protocol (MCP) server that enables AI agents to interact with Arduino boards for development and testing.
 
+> **Note:** This project was developed and tested on macOS with Cursor IDE. While it should work on other platforms, some paths and configurations may need adjustment for Windows or Linux systems.
+
 ## What is this?
 
 This project demonstrates how to create an MCP server that allows AI agents to:
