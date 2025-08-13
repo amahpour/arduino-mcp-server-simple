@@ -4,12 +4,16 @@ version = "0.1.0"
 description = "A simple Model Context Protocol (MCP) server for interacting with Arduino boards."
 authors = ["Your Name <you@example.com>"]
 readme = "README.md"
-packages = [{include = "mcp_arduino.py"}]
+# Include the package containing the MCP tool
+packages = [{include = "arduino_mcp_tool"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
 fastmcp = "2.10.6"
 pyserial = "3.5"
+
+[tool.poetry.scripts]
+arduino-mcp-tool = "arduino_mcp_tool:main"
 
 [build-system]
 requires = ["poetry-core"]

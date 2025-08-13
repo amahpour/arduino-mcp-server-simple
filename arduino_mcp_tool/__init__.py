@@ -269,6 +269,11 @@ async def serial_send(port: str, baud: int, message: str, timeout: float = 2):
     return await loop.run_in_executor(None, _io)
 
 
+def main() -> None:
+    """Entry point for console script."""
+    mcp.run()
+
+
 if __name__ == "__main__":
     # Start the MCP server when run directly
-    mcp.run()
+    main()
