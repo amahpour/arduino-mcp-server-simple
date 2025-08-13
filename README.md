@@ -15,14 +15,14 @@ This project demonstrates how to create an MCP server that allows AI agents to:
 ## Prerequisites
 
 - Arduino CLI installed and configured
-- Python 3.7+
+- Python 3.10+
 - An Arduino board connected via USB
 
 ## Installation
 
-1. Install dependencies:
+1. Install the package directly from GitHub:
 ```bash
-pip install -r requirements.txt
+pip install git+https://github.com/your-username/arduino-mcp-server-simple.git
 ```
 
 2. Make sure Arduino CLI is installed and configured:
@@ -74,4 +74,4 @@ The included `sketches/echo_serial/echo_serial.ino` is a simple echo server that
 
 ## Integration
 
-This MCP server can be integrated with any MCP-compatible AI agent or development environment to enable automated Arduino development workflows. 
+This MCP server can be integrated with any MCP-compatible AI agent or development environment to enable automated Arduino development workflows.
