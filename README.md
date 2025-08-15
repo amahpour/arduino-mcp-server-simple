@@ -22,7 +22,16 @@ This project demonstrates how to create an MCP server that allows AI agents to:
 
 1. Install the package directly from GitHub:
 ```bash
-pip install git+https://github.com/your-username/arduino-mcp-server-simple.git
+# Install from main branch
+pip install git+https://github.com/amahpour/arduino-mcp-server-simple.git
+
+# Or install from the specific MCP-enabled branch
+pip install git+https://github.com/amahpour/arduino-mcp-server-simple.git@codex/update-pyproject.toml-for-mcp-tool
+
+# For development (editable install)
+git clone https://github.com/amahpour/arduino-mcp-server-simple.git
+cd arduino-mcp-server-simple
+pip install -e .
 ```
 
 2. Make sure Arduino CLI is installed and configured:
@@ -34,8 +43,30 @@ arduino-cli version
 
 ### Start the MCP Server
 
+After installation, you can start the server in multiple ways:
+
 ```bash
-python mcp_arduino.py
+# Using the console script (recommended)
+arduino-mcp-tool
+
+# Or using module execution
+python -m arduino_mcp_tool
+```
+
+For development or local testing:
+```bash
+# From the repository directory
+python -m arduino_mcp_tool
+```
+
+### Package Structure
+
+The project is organized as a proper Python package:
+
+```
+arduino_mcp_tool/
+├── __init__.py      # Main MCP server implementation
+└── __main__.py      # Entry point for python -m execution
 ```
 
 ### Cursor Integration
@@ -75,3 +106,31 @@ The included `sketches/echo_serial/echo_serial.ino` is a simple echo server that
 ## Integration
 
 This MCP server can be integrated with any MCP-compatible AI agent or development environment to enable automated Arduino development workflows.
+
+### MCP Configuration
+
+When using this server with MCP clients, you can configure it as:
+
+```json
+{
+  "mcpServers": {
+    "arduino": {
+      "command": "arduino-mcp-tool",
+      "args": []
+    }
+  }
+}
+```
+
+Or if installed in development mode:
+
+```json
+{
+  "mcpServers": {
+    "arduino": {
+      "command": "python",
+      "args": ["-m", "arduino_mcp_tool"]
+    }
+  }
+}
+```
