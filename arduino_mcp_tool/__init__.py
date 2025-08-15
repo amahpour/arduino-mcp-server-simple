@@ -269,6 +269,97 @@ async def serial_send(port: str, baud: int, message: str, timeout: float = 2):
     return await loop.run_in_executor(None, _io)
 
 
+@mcp.tool()
+async def serial_write(port: str, baud: int, message: str):
+    """
+    Send a message over serial without reading a response.
+
+    Opens a serial connection to the specified port, sends the message,
+    and immediately closes the connection. This is useful for sending
+    commands or data to Arduino sketches that don't need to respond.
+
+    Args:
+        port (str): Serial port to connect to (e.g., "/dev/cu.usbmodem1234")
+        baud (int): Baud rate for serial communication (e.g., 9600, 115200)
+        message (str): Message to send over serial
+
+    Returns:
+        str: Confirmation message indicating successful transmission
+
+    Raises:
+        RuntimeError: If serial communication fails
+
+    Example:
+        await serial_write("/dev/cu.usbmodem1234", 115200, "LED_ON")
+    """
+    import serial
+
+    # Get the current event loop for running blocking I/O
+    loop = asyncio.get_event_loop()
+
+    def _io():
+        """
+        Internal function to handle blocking serial write operations.
+
+        This function runs in a thread pool to avoid blocking the event loop
+        during serial communication operations.
+        """
+        # Open serial connection with specified parameters
+        with serial.Serial(port, baud, timeout=1) as ser:
+            # Send message with newline and flush to ensure transmission
+            ser.write((message + "\n").encode())
+            ser.flush()
+            return f"Message sent successfully to {port}"
+
+    # Run the blocking I/O operation in a thread pool
+    return await loop.run_in_executor(None, _io)
+
+
+@mcp.tool()
+async def serial_read(port: str, baud: int, timeout: float = 2):
+    """
+    Read a message from serial without sending anything.
+
+    Opens a serial connection to the specified port and waits to read
+    incoming data. This is useful for monitoring serial output from
+    Arduino sketches or reading sensor data.
+
+    Args:
+        port (str): Serial port to connect to (e.g., "/dev/cu.usbmodem1234")
+        baud (int): Baud rate for serial communication (e.g., 9600, 115200)
+        timeout (float, optional): Timeout in seconds for reading. Defaults to 2.
+
+    Returns:
+        str: The data received from the serial port, or empty string if timeout
+
+    Raises:
+        RuntimeError: If serial communication fails
+
+    Example:
+        await serial_read("/dev/cu.usbmodem1234", 115200, timeout=5)
+    """
+    import serial
+
+    # Get the current event loop for running blocking I/O
+    loop = asyncio.get_event_loop()
+
+    def _io():
+        """
+        Internal function to handle blocking serial read operations.
+
+        This function runs in a thread pool to avoid blocking the event loop
+        during serial communication operations.
+        """
+        # Open serial connection with specified parameters
+        with serial.Serial(port, baud, timeout=timeout) as ser:
+            # Read response and decode, handling encoding errors gracefully
+            data = ser.readline().decode(errors="replace").strip()
+            return data if data else ""
+
+    # Run the blocking I/O operation in a thread pool
+    return await loop.run_in_executor(None, _io)
+
+
 def main() -> None:
     """Entry point for console script."""
     mcp.run()
