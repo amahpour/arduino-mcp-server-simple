@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "arduino": {
-      "command": "arduino-mcp-tool",
-      "args": []
+      "command": "python",
+      "args": ["-m", "arduino_mcp_tool"]
     }
   }
 }
