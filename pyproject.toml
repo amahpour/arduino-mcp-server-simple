@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "arduino-mcp-server-simple"
-version = "0.1.0"
+version = "0.2.0"
 description = "A simple Model Context Protocol (MCP) server for interacting with Arduino boards."
 authors = ["Ari Mahpour"]
 repository = "https://github.com/amahpour/arduino-mcp-server-simple"
