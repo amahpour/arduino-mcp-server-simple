@@ -88,6 +88,8 @@ The MCP server will be available as soon as you open this project in Cursor.
 - `compile(sketch, fqbn=None, port=None)` - Compile an Arduino sketch
 - `upload(sketch, port, fqbn=None)` - Upload a sketch to a board
 - `serial_send(port, baud, message, timeout=2)` - Send a message over serial and read response
+- `serial_write(port, baud, message)` - Send a message over serial without reading response
+- `serial_read(port, baud, timeout=2)` - Read incoming data from serial without sending anything
 
 ### Example Workflow
 
